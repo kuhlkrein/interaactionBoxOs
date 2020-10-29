@@ -1,5 +1,5 @@
 module testUI {
-    exports  sample;
+    exports main;
     requires javafx.controls;
     requires javafx.graphics;
     requires javafx.web;
