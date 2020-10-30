@@ -20,15 +20,7 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
 
-        primaryStage.setFullScreen(true);
-        primaryStage.show();
-    }
-
-    public void makesUnclosable() {
-//        primaryStage.setFullScreen(true);
-//        primaryStage.setResizable(false);
-//        primaryStage.setFullScreenExitHint("");
-//        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        StageUtils.displayUnclosable(primaryStage);
     }
 
     public static void main(String[] args) {

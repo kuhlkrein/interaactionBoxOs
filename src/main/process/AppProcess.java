@@ -12,7 +12,9 @@ import java.io.File;
 public interface AppProcess {
 
     Process start();
-    void init() ;
+
+    void init();
+
     Button createButton(BorderPane borderPane);
 
     default Button initButton(String ressourcePath, BorderPane borderPane) {

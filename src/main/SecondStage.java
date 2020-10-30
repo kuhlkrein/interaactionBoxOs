@@ -1,13 +1,15 @@
 package main;
 
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,9 +20,9 @@ import java.io.File;
 public class SecondStage extends Stage {
     public Process proc;
 
-    Circle[] buttons = new Circle[6];
-    
-    public SecondStage(Stage primaryStage){
+    Button[] buttons = new Button[6];
+
+    public SecondStage(Stage primaryStage) {
         super();
         this.initStyle(StageStyle.TRANSPARENT);
 
@@ -33,7 +35,7 @@ public class SecondStage extends Stage {
         exit.setOnMouseClicked((event) -> {
             primaryStage.show();
             primaryStage.toFront();
-            if(proc!=null) {
+            if (proc != null) {
                 proc.destroy();
             }
             this.hide();
@@ -52,66 +54,87 @@ public class SecondStage extends Stage {
         exit.setGraphic(logo);
 
         File f = new File("src/ressources/images/blured.jpg");
-       ImageView backgroundBlured = new ImageView(new Image("file:" + f.getAbsolutePath()));
+        ImageView backgroundBlured = new ImageView(new Image("file:" + f.getAbsolutePath()));
 
         backgroundBlured.setOpacity(0.9);
 
         backgroundBlured.fitWidthProperty().bind(primaryStage.widthProperty());
         backgroundBlured.fitHeightProperty().bind(primaryStage.heightProperty());
 
-        secondSageRoot.getChildren().addAll(backgroundBlured,exit);
+        secondSageRoot.getChildren().addAll(backgroundBlured, exit);
         setbackgroundListener(backgroundBlured);
-        createCircularButtons(exit,secondSageRoot);
+        createCircularButtons(exit, secondSageRoot);
 
         Scene scene = new Scene(secondSageRoot, Color.TRANSPARENT);
         this.setScene(scene);
-
-        this.toFront();
-        this.setFullScreen(true);
-        this.setAlwaysOnTop(true);
     }
 
-    public void setbackgroundListener(ImageView backgroundBlured){
-        backgroundBlured.setOnMouseMoved(event->{
+    public void setbackgroundListener(ImageView backgroundBlured) {
+        backgroundBlured.setOnMouseMoved(event -> {
 
-            for(Circle button: buttons){
+            for (Button button : buttons) {
                 double buttonOrigin = Point2D.distance(
-                        Screen.getPrimary().getBounds().getWidth()/2,
-                        Screen.getPrimary().getBounds().getHeight()/2,
-                        button.getCenterX(),
-                        button.getCenterY());
+                        Screen.getPrimary().getBounds().getWidth() / 2,
+                        Screen.getPrimary().getBounds().getHeight() / 2,
+                        button.getLayoutX(),
+                        button.getLayoutY());
                 double mouseOrigin = Point2D.distance(
-                        Screen.getPrimary().getBounds().getWidth()/2,
-                        Screen.getPrimary().getBounds().getHeight()/2,
+                        Screen.getPrimary().getBounds().getWidth() / 2,
+                        Screen.getPrimary().getBounds().getHeight() / 2,
                         event.getX(),
                         event.getY());
                 double mouseButton = Point2D.distance(
-                        button.getCenterX(),
-                        button.getCenterY(),
+                        button.getLayoutX(),
+                        button.getLayoutY(),
                         event.getX(),
                         event.getY());
 
-                if(mouseButton > buttonOrigin){
-                    button.setRadius(25 + 25 * (mouseOrigin/buttonOrigin));
+                if (mouseButton < buttonOrigin) {
+                    button.setPrefWidth(50 + 25 * (mouseOrigin / buttonOrigin));
+                    button.setPrefHeight(50 + 25 * (mouseOrigin / buttonOrigin));
+                } else {
+                    button.setPrefWidth(50);
+                    button.setPrefHeight(50);
                 }
 
             }
         });
     }
 
-    public void createCircularButtons(Button exit, Pane secondSageRoot){
-       for(int i = 0; i<6; i++){
-           buttons[i] = new Circle();
-           buttons[i].setRadius(50);
-           buttons[i].centerXProperty().bind(exit.layoutXProperty().add(200*Math.cos(Math.toRadians(i*360d/6d))));
-           buttons[i].centerYProperty().bind(exit.layoutYProperty().add(200*Math.sin(Math.toRadians(i*360d/6d))));
-           secondSageRoot.getChildren().add(buttons[i]);
+    public void createCircularButtons(Button exit, Pane secondSageRoot) {
+        for (int i = 0; i < 6; i++) {
+            buttons[i] = new Button("" + i);
+            setHandler(i);
+            buttons[i].setPrefWidth(50);
+            buttons[i].setPrefHeight(50);
+            buttons[i].layoutXProperty().bind(exit.layoutXProperty().add(200 * Math.cos(Math.toRadians(i * 360d / 6d))));
+            buttons[i].layoutYProperty().bind(exit.layoutYProperty().add(200 * Math.sin(Math.toRadians(i * 360d / 6d))));
+            secondSageRoot.getChildren().add(buttons[i]);
 
-           int index = i;
-           buttons[i].setOnMouseEntered(event->{
-               buttons[index].requestFocus();
-           });
-       }
+            int index = i;
+            buttons[i].setOnMouseEntered(event -> {
+                buttons[index].requestFocus();
+            });
+        }
+    }
+
+    public void setHandler(int i) {
+        EventHandler<MouseEvent> eventhandler = null;
+        switch (i) {
+            case 0:
+                buttons[i].setText("exit");
+                eventhandler = e -> {
+                    Platform.exit();
+                    System.exit(0);
+                };
+                break;
+            default:
+                break;
+        }
+
+        if (eventhandler != null) {
+            buttons[i].setOnMouseClicked(eventhandler);
+        }
     }
 
 }

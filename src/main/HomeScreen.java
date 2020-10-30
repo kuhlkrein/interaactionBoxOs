@@ -2,7 +2,10 @@ package main;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -31,10 +34,10 @@ public class HomeScreen extends BorderPane {
 
     }
 
-    private HBox createMenuBar(){
+    private HBox createMenuBar() {
         YoutubeProcess youtubeProcess = new YoutubeProcess();
         AugComProcess augComProcess = new AugComProcess();
-        GazePlayProcess gazePlayProcess= new GazePlayProcess();
+        GazePlayProcess gazePlayProcess = new GazePlayProcess();
 
         HBox menuBar = new HBox(
                 youtubeProcess.createButton(this),
@@ -49,7 +52,7 @@ public class HomeScreen extends BorderPane {
         return menuBar;
     }
 
-    private void createSecondStage(){
+    private void createSecondStage() {
         secondStage = new SecondStage(primaryStage);
     }
 
@@ -68,19 +71,17 @@ public class HomeScreen extends BorderPane {
         t.start();
     }
 
-    synchronized private void checkMouse(){
+    synchronized private void checkMouse() {
         PointerInfo a = MouseInfo.getPointerInfo();
         Point b = a.getLocation();
         int x = (int) b.getX();
         int y = (int) b.getY();
-        System.out.println(" X is " + x +" and Y is " + y);
-        if (x > 500 && x < Screen.getPrimary().getBounds().getWidth()-500 && y <= 10) {
+        System.out.println(" X is " + x + " and Y is " + y);
+        if (x > 500 && x < Screen.getPrimary().getBounds().getWidth() - 500 && y <= 10) {
             System.out.println("ENTERED");
             Platform.runLater(() -> {
                 primaryStage.hide();
-                secondStage.setFullScreen(true);
-                secondStage.show();
-                secondStage.toFront();
+                StageUtils.displayUnclosable(secondStage);
             });
         }
     }
