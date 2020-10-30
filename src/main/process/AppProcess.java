@@ -6,6 +6,7 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import main.SecondStage;
 
 import java.io.File;
 
@@ -15,19 +16,19 @@ public interface AppProcess {
 
     void init();
 
-    Button createButton(BorderPane borderPane);
+    Button createButton(BorderPane borderPane, SecondStage stage);
 
     default Button initButton(String ressourcePath, BorderPane borderPane) {
         Button newButton = new Button();
+
         File f = new File(ressourcePath);
+        ImageView logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
 
         newButton.setPrefWidth(borderPane.getWidth() / 8);
         newButton.setPrefHeight(borderPane.getHeight() / 4);
 
         newButton.prefWidthProperty().bind(borderPane.widthProperty().divide(8));
         newButton.prefHeightProperty().bind(borderPane.heightProperty().divide(4));
-
-        ImageView logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
 
         logo.setFitWidth(newButton.getWidth() * 0.7);
         logo.setFitHeight(newButton.getHeight() * 0.7);

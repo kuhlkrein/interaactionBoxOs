@@ -24,14 +24,13 @@ public class HomeScreen extends BorderPane {
         super();
         this.primaryStage = primaryStage;
 
+        createSecondStage();
         HBox menuBar = createMenuBar();
 
         this.setCenter(menuBar);
         this.setBackground(new Background(new BackgroundFill(Color.GREY, null, null)));
 
-        createSecondStage();
         startMouseListener();
-
     }
 
     private HBox createMenuBar() {
@@ -40,9 +39,9 @@ public class HomeScreen extends BorderPane {
         GazePlayProcess gazePlayProcess = new GazePlayProcess();
 
         HBox menuBar = new HBox(
-                youtubeProcess.createButton(this),
-                augComProcess.createButton(this),
-                gazePlayProcess.createButton(this)
+                youtubeProcess.createButton(this, secondStage),
+                augComProcess.createButton(this, secondStage),
+                gazePlayProcess.createButton(this, secondStage)
         );
 
         menuBar.setAlignment(Pos.CENTER);
@@ -78,7 +77,6 @@ public class HomeScreen extends BorderPane {
         int y = (int) b.getY();
         System.out.println(" X is " + x + " and Y is " + y);
         if (x > 500 && x < Screen.getPrimary().getBounds().getWidth() - 500 && y <= 10) {
-            System.out.println("ENTERED");
             Platform.runLater(() -> {
                 primaryStage.hide();
                 StageUtils.displayUnclosable(secondStage);

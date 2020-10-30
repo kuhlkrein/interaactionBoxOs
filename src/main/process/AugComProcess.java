@@ -2,6 +2,7 @@ package main.process;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import main.SecondStage;
 
 import java.io.IOException;
 
@@ -30,11 +31,11 @@ public class AugComProcess implements AppProcess {
     }
 
     @Override
-    public Button createButton(BorderPane borderPane) {
+    public Button createButton(BorderPane borderPane, SecondStage stage) {
         Button button = initButton("src/ressources/images/angular.png", borderPane);
         this.init();
         button.setOnMouseClicked((e) -> {
-            this.start();
+            stage.proc = this.start();
         });
         return button;
     }
