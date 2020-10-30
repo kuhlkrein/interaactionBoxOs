@@ -2,10 +2,9 @@ package main;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -14,6 +13,7 @@ import main.process.GazePlayProcess;
 import main.process.YoutubeProcess;
 
 import java.awt.*;
+import java.io.File;
 
 public class HomeScreen extends BorderPane {
 
@@ -24,13 +24,23 @@ public class HomeScreen extends BorderPane {
         super();
         this.primaryStage = primaryStage;
 
+        File f = new File("src/ressources/images/blured.jpg");
+        ImageView backgroundBlured = new ImageView(new Image("file:" + f.getAbsolutePath()));
+
+        backgroundBlured.setOpacity(0.9);
+
+        backgroundBlured.fitWidthProperty().bind(primaryStage.widthProperty());
+        backgroundBlured.fitHeightProperty().bind(primaryStage.heightProperty());
+
+        this.getChildren().add(backgroundBlured);
+
         createSecondStage();
         HBox menuBar = createMenuBar();
 
         this.setCenter(menuBar);
-        this.setBackground(new Background(new BackgroundFill(Color.GREY, null, null)));
 
         startMouseListener();
+
     }
 
     private HBox createMenuBar() {

@@ -24,11 +24,11 @@ public interface AppProcess {
         File f = new File(ressourcePath);
         ImageView logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
 
-        newButton.setPrefWidth(borderPane.getWidth() / 8);
-        newButton.setPrefHeight(borderPane.getHeight() / 4);
+        newButton.setPrefWidth(200);
+        newButton.setPrefHeight(200);
 
-        newButton.prefWidthProperty().bind(borderPane.widthProperty().divide(8));
-        newButton.prefHeightProperty().bind(borderPane.heightProperty().divide(4));
+//        newButton.prefWidthProperty().bind(borderPane.widthProperty().divide(8));
+//        newButton.prefHeightProperty().bind(borderPane.heightProperty().divide(4));
 
         logo.setFitWidth(newButton.getWidth() * 0.7);
         logo.setFitHeight(newButton.getHeight() * 0.7);
@@ -39,7 +39,7 @@ public interface AppProcess {
 
         newButton.setGraphic(logo);
 
-        newButton.setStyle("-fx-background-radius: 5%; ");
+        newButton.setStyle("-fx-background-radius: 50%; ");
 
         Reflection reflection = new Reflection();
         reflection.setBottomOpacity(0);

@@ -37,10 +37,9 @@ public class SecondStage extends Stage {
         exit.setPrefWidth(50);
         exit.setPrefHeight(50);
         exit.setOnMouseClicked((event) -> {
-            primaryStage.show();
-            primaryStage.toFront();
-            if (proc != null) {
-                proc.destroy();
+            if (proc == null) {
+                primaryStage.show();
+                primaryStage.toFront();
             }
             this.hide();
         });
@@ -81,30 +80,31 @@ public class SecondStage extends Stage {
         backgroundBlured.setOnMouseMoved(event -> {
 
             for (Button button : buttons) {
-                double buttonOrigin = Point2D.distance(
-                        Screen.getPrimary().getBounds().getWidth() / 2,
-                        Screen.getPrimary().getBounds().getHeight() / 2,
-                        button.getLayoutX(),
-                        button.getLayoutY());
-                double mouseOrigin = Point2D.distance(
-                        Screen.getPrimary().getBounds().getWidth() / 2,
-                        Screen.getPrimary().getBounds().getHeight() / 2,
-                        event.getX(),
-                        event.getY());
-                double mouseButton = Point2D.distance(
-                        button.getLayoutX(),
-                        button.getLayoutY(),
-                        event.getX(),
-                        event.getY());
+                if(button != null) {
+                    double buttonOrigin = Point2D.distance(
+                            Screen.getPrimary().getBounds().getWidth() / 2,
+                            Screen.getPrimary().getBounds().getHeight() / 2,
+                            button.getLayoutX(),
+                            button.getLayoutY());
+                    double mouseOrigin = Point2D.distance(
+                            Screen.getPrimary().getBounds().getWidth() / 2,
+                            Screen.getPrimary().getBounds().getHeight() / 2,
+                            event.getX(),
+                            event.getY());
+                    double mouseButton = Point2D.distance(
+                            button.getLayoutX(),
+                            button.getLayoutY(),
+                            event.getX(),
+                            event.getY());
 
-                if (mouseButton < buttonOrigin) {
-                    button.setPrefWidth(50 + 25 * (mouseOrigin / buttonOrigin));
-                    button.setPrefHeight(50 + 25 * (mouseOrigin / buttonOrigin));
-                } else {
-                    button.setPrefWidth(50);
-                    button.setPrefHeight(50);
+                    if (mouseButton < buttonOrigin) {
+                        button.setPrefWidth(50 + 25 * (mouseOrigin / buttonOrigin));
+                        button.setPrefHeight(50 + 25 * (mouseOrigin / buttonOrigin));
+                    } else {
+                        button.setPrefWidth(50);
+                        button.setPrefHeight(50);
+                    }
                 }
-
             }
         });
     }
