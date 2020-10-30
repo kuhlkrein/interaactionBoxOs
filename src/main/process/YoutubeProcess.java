@@ -37,6 +37,9 @@ public class YoutubeProcess implements AppProcess {
         button.setOnMouseClicked((e) -> {
             stage.proc = this.start();
         });
+        button.setOnMouseEntered(e-> {
+            button.requestFocus();
+        });
         return button;
     }
 
