@@ -66,7 +66,7 @@ public class SecondStage extends Stage {
 
         secondSageRoot.getChildren().addAll(backgroundBlured, exit);
         setbackgroundListener(backgroundBlured);
-        createCircularButtons(exit, secondSageRoot);
+        createCircularButtons(exit, secondSageRoot, primaryStage);
 
         Scene scene = new Scene(secondSageRoot, Color.TRANSPARENT);
         this.setScene(scene);
@@ -109,11 +109,11 @@ public class SecondStage extends Stage {
         });
     }
 
-    public void createCircularButtons(Button exit, Pane secondSageRoot) {
-        int numberOfButtons = 4;
+    public void createCircularButtons(Button exit, Pane secondSageRoot, Stage primaryStage) {
+        int numberOfButtons = 5;
         for (int i = 0; i < numberOfButtons; i++) {
             buttons[i] = new Button("" + i);
-            setHandler(i);
+            setHandler(i, primaryStage);
             buttons[i].setPrefWidth(50);
             buttons[i].setPrefHeight(50);
             buttons[i].setShape(new Circle(50));
@@ -128,7 +128,7 @@ public class SecondStage extends Stage {
         }
     }
 
-    public void setHandler(int i) {
+    public void setHandler(int i, Stage primaryStage) {
         EventHandler<MouseEvent> eventhandler = null;
         File f;
         ImageView logo;
@@ -189,6 +189,17 @@ public class SecondStage extends Stage {
                     GazePlayProcess gazePlayProcess = new GazePlayProcess();
                     gazePlayProcess.init();
                     proc = gazePlayProcess.start();
+                };
+                break;
+            case 4:
+                buttons[i].setText("menu");
+                eventhandler = (event) -> {
+                    if (proc != null) {
+                        proc.destroy();
+                    }
+                    this.hide();
+                        primaryStage.show();
+                        primaryStage.toFront();
                 };
                 break;
             default:
