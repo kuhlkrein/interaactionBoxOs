@@ -48,11 +48,6 @@ public class StageUtils {
     }
 
     public static void displayUnclosable(SecondStage primaryStage) {
-        if (primaryStage.proc == null) {
-            primaryStage.setOpacityBackground(1);
-        } else {
-            primaryStage.setOpacityBackground(0.8);
-        }
         makesUnclosable(primaryStage);
         primaryStage.toFront();
         primaryStage.setAlwaysOnTop(true);
