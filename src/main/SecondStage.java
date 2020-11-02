@@ -24,7 +24,7 @@ public class SecondStage extends Stage {
     public Process proc;
 
     Button[] buttons = new Button[6];
-    final  ImageView backgroundBlured;
+    final ImageView backgroundBlured;
 
     public SecondStage(Stage primaryStage) {
         super();
@@ -72,7 +72,7 @@ public class SecondStage extends Stage {
         this.setScene(scene);
     }
 
-    public void setOpacityBackground(double d){
+    public void setOpacityBackground(double d) {
         backgroundBlured.setOpacity(d);
     }
 
@@ -80,7 +80,7 @@ public class SecondStage extends Stage {
         backgroundBlured.setOnMouseMoved(event -> {
 
             for (Button button : buttons) {
-                if(button != null) {
+                if (button != null) {
                     double buttonOrigin = Point2D.distance(
                             Screen.getPrimary().getBounds().getWidth() / 2,
                             Screen.getPrimary().getBounds().getHeight() / 2,
@@ -198,8 +198,8 @@ public class SecondStage extends Stage {
                         proc.destroy();
                     }
                     this.hide();
-                        primaryStage.show();
-                        primaryStage.toFront();
+                    primaryStage.show();
+                    primaryStage.toFront();
                 };
                 break;
             default:

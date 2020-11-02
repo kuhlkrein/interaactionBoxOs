@@ -2,7 +2,6 @@ package main.process;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import main.SecondStage;
 
 import java.io.IOException;
@@ -37,7 +36,7 @@ public class YoutubeProcess implements AppProcess {
         button.setOnMouseClicked((e) -> {
             stage.proc = this.start();
         });
-        button.setOnMouseEntered(e-> {
+        button.setOnMouseEntered(e -> {
             button.requestFocus();
         });
         return button;

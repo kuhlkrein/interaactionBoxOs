@@ -48,7 +48,7 @@ public class StageUtils {
     }
 
     public static void displayUnclosable(SecondStage primaryStage) {
-        if(primaryStage.proc == null){
+        if (primaryStage.proc == null) {
             primaryStage.setOpacityBackground(1);
         } else {
             primaryStage.setOpacityBackground(0.8);
