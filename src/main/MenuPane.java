@@ -103,7 +103,7 @@ public class MenuPane extends Pane {
         });
     }
 
-    public void createCircularButtons(Stage primaryStage) {
+    public void createCircularButtons() {
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).setPrefWidth(50);
             buttons.get(i).setPrefHeight(50);

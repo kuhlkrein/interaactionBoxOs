@@ -29,15 +29,12 @@ public class GazePlayProcess implements AppProcess {
     }
 
     private ProcessBuilder createGazePlayBuilder() {
-        String javaHome = System.getProperty("java.home");
-        String javaBin = javaHome +
-                File.separator + "bin" +
-                File.separator + "java";
-        String classpath = ClassPath.get;
+        String javaBin =  "C:\\Program Files (x86)\\GazePlay\\lib\\jre\\bin\\java.exe";
+        String classpath = "C:\\Program Files (x86)\\GazePlay\\lib\\*";
 
-        System.out.println(classpath);
         LinkedList<String> commands = new LinkedList<>(Arrays.asList(javaBin, "-cp", classpath, "net.gazeplay.GazePlayLauncher"));
 
+        System.out.println(javaBin + " " + "-cp" + " " + classpath + " " + "net.gazeplay.GazePlayLauncher");
 
         return new ProcessBuilder(commands);
     }

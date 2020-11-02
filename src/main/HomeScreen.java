@@ -85,7 +85,6 @@ public class HomeScreen extends BorderPane {
         Point b = a.getLocation();
         int x = (int) b.getX();
         int y = (int) b.getY();
-        System.out.println(" X is " + x + " and Y is " + y);
         if (x > 500 && x < Screen.getPrimary().getBounds().getWidth() - 500 && y <= 10) {
             Platform.runLater(() -> {
                 primaryStage.hide();

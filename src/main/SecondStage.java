@@ -34,7 +34,7 @@ public class SecondStage extends Stage {
             this.hide();
         });
         secondSageRoot.buttons=setButtons(primaryStage);
-        secondSageRoot.createCircularButtons(primaryStage);
+        secondSageRoot.createCircularButtons();
 
         Scene scene = new Scene(secondSageRoot, Color.TRANSPARENT);
         this.setScene(scene);

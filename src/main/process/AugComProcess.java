@@ -16,7 +16,7 @@ public class AugComProcess implements AppProcess {
                 // "--fullscreen","--app="+"http://www.augcom.net");
                 // "--new-window", "--disable-pinch", "--overscroll-history-navigation=0",
                 "--kiosk",
-                "--window-position=0,0", "--disable-gpu", "--no-sandbox", "--fullscreen", "http://localhost:4200/");
+                "--window-position=0,0", "--disable-gpu", "--no-sandbox", "--fullscreen", "http://www.augcom.net/");
         //"--start-fullscreen" ,"--new-window","--window-position=0,0",  "--disable-gpu", "--no-sandbox", "http://www.augcom.net");
     }
 
