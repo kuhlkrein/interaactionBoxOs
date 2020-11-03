@@ -1,3 +1,5 @@
+package main;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

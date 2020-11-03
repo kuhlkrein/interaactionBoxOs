@@ -1,3 +1,5 @@
+package main;
+
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.scene.input.KeyCode;

@@ -1,4 +1,4 @@
-package gaze.devicemanager;
+package main.gaze.devicemanager;
 
 import javafx.scene.Node;
 import lombok.Getter;

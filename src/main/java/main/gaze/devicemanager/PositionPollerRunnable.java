@@ -1,39 +1,37 @@
-package gaze.devicemanager;
+package main.gaze.devicemanager;
 
 import javafx.application.Platform;
-import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import main.SecondStage;
 import tobii.Tobii;
-
-import java.util.function.Supplier;
 
 @Slf4j
 public class PositionPollerRunnable implements Runnable {
 
-    private final Supplier<Dimension2D> screenDimensionSupplier;
-
-    private final Supplier<Point2D> screenPositionSupplier;
-
     private final TobiiGazeDeviceManager tobiiGazeDeviceManager;
+    private final SecondStage stage;
 
     @Setter
     private transient boolean stopRequested = false;
 
-    public PositionPollerRunnable(final Supplier<Dimension2D> screenDimensionSupplier, final Supplier<Point2D> screenPositionSupplier, final TobiiGazeDeviceManager tobiiGazeDeviceManager) {
-        this.screenDimensionSupplier = screenDimensionSupplier;
-        this.screenPositionSupplier = screenPositionSupplier;
+    public PositionPollerRunnable(final TobiiGazeDeviceManager tobiiGazeDeviceManager, SecondStage stage) {
         this.tobiiGazeDeviceManager = tobiiGazeDeviceManager;
+        this.stage = stage;
     }
 
     @Override
     public void run() {
         while (!stopRequested) {
-            try {
-                poll();
-            } catch (final RuntimeException e) {
-                log.warn("Exception while polling position of gaze", e);
+            if(stage.proc==null) {
+                try {
+                    poll();
+                } catch (final RuntimeException e) {
+                    log.warn("Exception while polling position of main.gaze", e);
+                }
             }
 
             // sleep is mandatory to avoid too much calls to gazePosition()
@@ -51,18 +49,17 @@ public class PositionPollerRunnable implements Runnable {
         final float xRatio = pointAsFloatArray[0];
         final float yRatio = pointAsFloatArray[1];
 
-        final Dimension2D screenDimension = screenDimensionSupplier.get();
+        final Rectangle2D screenDimension = Screen.getPrimary().getBounds();//screenDimensionSupplier.get();
         final double positionX = xRatio * screenDimension.getWidth();
         final double positionY = yRatio * screenDimension.getHeight();
 
 
-        final Point2D screenPosition = screenPositionSupplier.get();
-        final double offsetX = screenPosition.getX();
-        final double offsetY = screenPosition.getY();
+        final double offsetX = 0;
+        final double offsetY =0;
 
         final Point2D point = new Point2D(positionX + offsetX, positionY + offsetY);
 
-        Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "gaze"));
+        Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
     }
 
 }

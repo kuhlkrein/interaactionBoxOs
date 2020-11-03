@@ -1,6 +1,6 @@
-package gaze;
+package main.gaze;
 
-import gaze.devicemanager.GazeEvent;
+import main.gaze.devicemanager.GazeEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.SequentialTransition;

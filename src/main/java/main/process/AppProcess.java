@@ -1,9 +1,13 @@
+package main.process;
+
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import main.SecondStage;
 
 import java.io.File;
 
@@ -13,7 +17,7 @@ public interface AppProcess {
 
     void init();
 
-    Button createButton(BorderPane borderPane, SecondStage stage);
+    StackPane createButton(BorderPane borderPane, SecondStage stage);
 
     default Button initButton(String ressourcePath, BorderPane borderPane) {
         Button newButton = new Button();

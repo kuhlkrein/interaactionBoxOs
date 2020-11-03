@@ -1,4 +1,4 @@
-package gaze;
+package main.gaze;
 
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;

@@ -1,15 +1,9 @@
-package gaze.devicemanager;
+package main.gaze.devicemanager;
 
-import gaze.GazeMotionListener;
-import javafx.geometry.Dimension2D;
-import javafx.geometry.Point2D;
+import main.gaze.GazeMotionListener;
 import javafx.scene.Node;
 
-import java.util.function.Supplier;
-
 public interface GazeDeviceManager {
-
-    void init(Supplier<Dimension2D> currentScreenDimensionSupplier, Supplier<Point2D> currentScreenPositionSupplier);
 
     void destroy();
 

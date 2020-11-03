@@ -1,19 +1,16 @@
-package gaze.devicemanager;
+package main.gaze.devicemanager;
 
-import gaze.GazeMotionListener;
+import main.gaze.GazeMotionListener;
 import javafx.application.Platform;
-import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.awt.*;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Supplier;
 
 /**
  * Created by schwab on 04/10/2017.
@@ -37,9 +34,6 @@ public abstract class AbstractGazeDeviceManager implements GazeDeviceManager {
     public AbstractGazeDeviceManager() {
 
     }
-
-    @Override
-    public abstract void init(Supplier<Dimension2D> currentScreenDimensionSupplier, Supplier<Point2D> currentScreenPositionSupplier);
 
     @Override
     public abstract void destroy();
@@ -128,7 +122,7 @@ public abstract class AbstractGazeDeviceManager implements GazeDeviceManager {
     }
 
     /**
-     * Clear all Nodes in both EventFilter and EventHandler. There is no more gaze event after this function is called
+     * Clear all Nodes in both EventFilter and EventHandler. There is no more main.gaze event after this function is called
      */
     @Override
     public void clear() {
@@ -182,7 +176,7 @@ public abstract class AbstractGazeDeviceManager implements GazeDeviceManager {
             Point2D localPosition = node.screenToLocal(positionX, positionY);
 
             if (localPosition != null && contains(node, positionX, positionY)) {
-                if (event.equals("gaze")) {
+                if (event.equals("main/gaze")) {
                     if (gi.isOnGaze()) {
                         Platform.runLater(
                             () ->
@@ -219,9 +213,9 @@ public abstract class AbstractGazeDeviceManager implements GazeDeviceManager {
                         return true;
                     }
                 }
-            } else {// gaze is not on the shape
-                if (event.equals("gaze")) {
-                    if (gi.isOnGaze()) {// gaze was on the shape previously
+            } else {// main.gaze is not on the shape
+                if (event.equals("main/gaze")) {
+                    if (gi.isOnGaze()) {// main.gaze was on the shape previously
                         gi.setOnGaze(false);
                         gi.setTime(-1);
                         if (localPosition != null) {
@@ -232,7 +226,7 @@ public abstract class AbstractGazeDeviceManager implements GazeDeviceManager {
                         }
                     }
                 } else {
-                    if (gi.isOnMouse()) {// gaze was on the shape previously
+                    if (gi.isOnMouse()) {// main.gaze was on the shape previously
                         gi.setOnMouse(false);
                         gi.setTime(-1);
                         if (localPosition != null) {

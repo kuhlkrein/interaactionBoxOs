@@ -1,6 +1,6 @@
-package tobii;
+package main.gaze;
 
-import gaze.devicemanager.TobiiGazeDeviceManager;
+import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
@@ -34,7 +34,7 @@ public class PositionPollerRunnable implements Runnable {
             try {
                 poll();
             } catch (final RuntimeException e) {
-                log.warn("Exception while polling position of gaze", e);
+                log.warn("Exception while polling position of main.gaze", e);
             }
 
             // sleep is mandatory to avoid too much calls to gazePosition()
@@ -63,7 +63,7 @@ public class PositionPollerRunnable implements Runnable {
 
         final Point2D point = new Point2D(positionX + offsetX, positionY + offsetY);
 
-        Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "gaze"));
+        Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
     }
 
 }

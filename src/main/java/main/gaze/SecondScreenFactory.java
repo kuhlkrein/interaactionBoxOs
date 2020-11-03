@@ -1,4 +1,4 @@
-package gaze;
+package main.gaze;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Group;

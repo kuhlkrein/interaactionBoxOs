@@ -1,4 +1,4 @@
-package gaze;
+package main.gaze;
 
 public enum EyeTracker {
     mouse_control, tobii_eyeX_4C, eyetribe
