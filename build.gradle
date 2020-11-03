@@ -1,0 +1,61 @@
+
+buildscript {
+    group = 'com.github.gazeplay'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+plugins {
+    id 'io.freefair.lombok' version '4.1.4'
+}
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'jacoco'
+apply plugin: "pmd"
+apply plugin: 'distribution'
+
+
+
+allprojects {
+    group = 'com.github.gazeplay'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+
+        maven {
+            url = 'https://jitpack.io'
+        }
+
+        maven {
+            url = 'https://raw.github.com/agomezmoron/screen-recorder/mvn-repo'
+        }
+    }
+}
+
+
+dependencies {
+    compile 'com.github.GazePlay:TobiiStreamEngineForJava:5.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'org.rxtx:rxtx:2.1.7'
+    compile 'ch.qos.logback:logback-classic:1.2.1'
+    compile 'ch.qos.logback:logback-core:1.2.1'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'uk.org.lidalia:sysout-over-slf4j:1.0.2'
+    compile 'javax.media:jmf:2.1.1e'
+    compile 'ws.schild:jave-all-deps:2.5.0'
+    compile 'ws.schild:jave-core:2.5.0'
+    runtime 'org.slf4j:jcl-over-slf4j:1.7.25'
+    runtime 'org.slf4j:log4j-over-slf4j:1.7.25'
+}
+
+allprojects {
+    group = 'com.github.gazeplay'
+    repositories {
+        mavenCentral()
+    }
+}

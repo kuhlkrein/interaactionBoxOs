@@ -1,5 +1,3 @@
-package main;
-
 public class ClassPath {
 
     public static String get =

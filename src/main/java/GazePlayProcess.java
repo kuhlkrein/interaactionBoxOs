@@ -1,11 +1,6 @@
-package main.process;
-
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import main.ClassPath;
-import main.SecondStage;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;

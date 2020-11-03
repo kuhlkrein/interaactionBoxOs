@@ -1,5 +1,3 @@
-package main;
-
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -8,10 +6,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import main.process.AugComProcess;
-import main.process.GazePlayProcess;
-import main.process.YoutubeProcess;
-
 import java.awt.*;
 import java.io.File;
 

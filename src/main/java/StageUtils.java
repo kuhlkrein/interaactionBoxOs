@@ -1,5 +1,3 @@
-package main;
-
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.scene.input.KeyCode;
@@ -59,5 +57,21 @@ public class StageUtils {
         primaryStage.toFront();
         primaryStage.setAlwaysOnTop(true);
         primaryStage.show();
+    }
+
+    public void onFrontThread(Stage primaryStage){
+        Thread t = new Thread(() -> {
+            while (true) {
+                Platform.runLater(() -> {
+                    primaryStage.toFront();
+                });
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ignored) {
+
+                }
+            }
+        });
+        t.start();
     }
 }

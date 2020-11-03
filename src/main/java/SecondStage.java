@@ -1,5 +1,3 @@
-package main;
-
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,9 +8,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.process.AugComProcess;
-import main.process.GazePlayProcess;
-import main.process.YoutubeProcess;
 
 import java.io.File;
 import java.util.LinkedList;
