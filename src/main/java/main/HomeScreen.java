@@ -1,5 +1,6 @@
 package main;
 
+import main.gaze.devicemanager.AbstractGazeDeviceManager;
 import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -18,14 +19,27 @@ import java.io.File;
 
 public class HomeScreen extends BorderPane {
 
+    int MOUSE_INTERACTION = 0;
+    int GAZE_INTERACTION = 1;
+    int selectionMode = MOUSE_INTERACTION;
+
     private Stage primaryStage;
     public SecondStage secondStage;
-    final TobiiGazeDeviceManager tgdm;
+    final AbstractGazeDeviceManager tgdm;
 
-    HomeScreen(Stage primaryStage,TobiiGazeDeviceManager tgdm) {
+    HomeScreen(Stage primaryStage) {
         super();
         this.primaryStage = primaryStage;
-        this.tgdm = tgdm;
+        if(selectionMode == GAZE_INTERACTION) {
+            this.tgdm = new TobiiGazeDeviceManager();
+        } else {
+            this.tgdm = new AbstractGazeDeviceManager() {
+                @Override
+                public void destroy() {
+
+                }
+            };
+        }
 
         File f = new File("src/ressources/images/blured.jpg");
         ImageView backgroundBlured = new ImageView(new Image("file:" + f.getAbsolutePath()));
@@ -53,9 +67,9 @@ public class HomeScreen extends BorderPane {
         AugComProcess augComProcess = new AugComProcess();
         GazePlayProcess gazePlayProcess = new GazePlayProcess();
 
-        ProgressButton youtubeProgressButton = youtubeProcess.createButton(this, secondStage);
-        ProgressButton augComProcessButton =augComProcess.createButton(this, secondStage);
-        ProgressButton gazePlayProcessButton =gazePlayProcess.createButton(this, secondStage);
+        ProgressButton youtubeProgressButton = youtubeProcess.createButton(this, secondStage, tgdm);
+        ProgressButton augComProcessButton =augComProcess.createButton(this, secondStage,tgdm);
+        ProgressButton gazePlayProcessButton =gazePlayProcess.createButton(this, secondStage,tgdm);
         HBox menuBar = new HBox(
                 youtubeProgressButton,
                 augComProcessButton,
@@ -73,8 +87,10 @@ public class HomeScreen extends BorderPane {
     }
 
     private void createSecondStage() {
-        secondStage = new SecondStage(primaryStage);
-        tgdm.init(secondStage);
+        secondStage = new SecondStage(primaryStage, tgdm);
+        if(selectionMode == GAZE_INTERACTION) {
+            ((TobiiGazeDeviceManager)tgdm).init(secondStage);
+        }
     }
 
     private void startMouseListener() {

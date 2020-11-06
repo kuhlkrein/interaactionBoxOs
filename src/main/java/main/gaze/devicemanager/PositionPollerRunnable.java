@@ -9,16 +9,19 @@ import lombok.extern.slf4j.Slf4j;
 import main.SecondStage;
 import tobii.Tobii;
 
+import java.awt.*;
+
 @Slf4j
 public class PositionPollerRunnable implements Runnable {
 
     private final TobiiGazeDeviceManager tobiiGazeDeviceManager;
     private final SecondStage stage;
+    Robot robot = new Robot();
 
     @Setter
     private transient boolean stopRequested = false;
 
-    public PositionPollerRunnable(final TobiiGazeDeviceManager tobiiGazeDeviceManager, SecondStage stage) {
+    public PositionPollerRunnable(final TobiiGazeDeviceManager tobiiGazeDeviceManager, SecondStage stage) throws AWTException {
         this.tobiiGazeDeviceManager = tobiiGazeDeviceManager;
         this.stage = stage;
     }
@@ -26,13 +29,12 @@ public class PositionPollerRunnable implements Runnable {
     @Override
     public void run() {
         while (!stopRequested) {
-            if(stage.proc==null) {
                 try {
                     poll();
                 } catch (final RuntimeException e) {
                     log.warn("Exception while polling position of main.gaze", e);
                 }
-            }
+
 
             // sleep is mandatory to avoid too much calls to gazePosition()
             try {
@@ -49,7 +51,7 @@ public class PositionPollerRunnable implements Runnable {
         final float xRatio = pointAsFloatArray[0];
         final float yRatio = pointAsFloatArray[1];
 
-        final Rectangle2D screenDimension = Screen.getPrimary().getBounds();//screenDimensionSupplier.get();
+        final Rectangle2D screenDimension = Screen.getPrimary().getBounds();
         final double positionX = xRatio * screenDimension.getWidth();
         final double positionY = yRatio * screenDimension.getHeight();
 
@@ -59,7 +61,8 @@ public class PositionPollerRunnable implements Runnable {
 
         final Point2D point = new Point2D(positionX + offsetX, positionY + offsetY);
 
-        Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
+        robot.mouseMove((int)point.getX(),(int) point.getY());
+      //  Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
     }
 
 }

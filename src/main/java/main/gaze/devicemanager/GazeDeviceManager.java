@@ -1,6 +1,5 @@
 package main.gaze.devicemanager;
 
-import main.gaze.GazeMotionListener;
 import javafx.scene.Node;
 
 public interface GazeDeviceManager {

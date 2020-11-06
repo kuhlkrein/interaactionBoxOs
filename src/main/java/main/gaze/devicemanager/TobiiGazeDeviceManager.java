@@ -3,6 +3,7 @@ package main.gaze.devicemanager;
 import lombok.extern.slf4j.Slf4j;
 import main.SecondStage;
 
+import java.awt.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -18,7 +19,11 @@ public class TobiiGazeDeviceManager extends AbstractGazeDeviceManager {
     }
 
     public void init(SecondStage stage) {
-        positionPollerRunnable = new PositionPollerRunnable( this, stage);
+        try {
+            positionPollerRunnable = new PositionPollerRunnable( this, stage);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
         executorService = Executors.newSingleThreadExecutor();
         executorService.submit(positionPollerRunnable);
     }

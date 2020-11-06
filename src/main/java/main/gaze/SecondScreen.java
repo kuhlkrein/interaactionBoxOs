@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import main.gaze.devicemanager.GazeMotionListener;
 
 /**
  * Created by schwab on 10/09/2016.

@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import main.ProgressButton;
 import main.SecondStage;
+import main.gaze.devicemanager.AbstractGazeDeviceManager;
+import main.gaze.devicemanager.TobiiGazeDeviceManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,10 +20,7 @@ public class GazePlayProcess implements AppProcess {
     @Override
     public Process start() {
         try {
-            Process p = pb.inheritIO().start();
-            Platform.exit();
-            System.exit(0);
-            return p;
+            return pb.inheritIO().start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,7 +44,7 @@ public class GazePlayProcess implements AppProcess {
     }
 
     @Override
-    public ProgressButton createButton(BorderPane borderPane, SecondStage stage) {
+    public ProgressButton createButton(BorderPane borderPane, SecondStage stage, AbstractGazeDeviceManager tgdm) {
         ProgressButton pb = new ProgressButton();
         File f = new File("src/ressources/images/gazeplayicon.png");
         ImageView logo = new ImageView(new Image("file:" + f.getAbsolutePath()));

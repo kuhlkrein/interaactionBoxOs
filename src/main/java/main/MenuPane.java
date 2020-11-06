@@ -16,7 +16,7 @@ import java.util.LinkedList;
 
 public class MenuPane extends Pane {
 
-    LinkedList<Button> buttons = new LinkedList<Button>();
+    LinkedList<ProgressButton> buttons = new LinkedList<ProgressButton>();
 
     final ImageView backgroundBlured;
     final Stage primaryStage;
@@ -73,7 +73,7 @@ public class MenuPane extends Pane {
     public void setBackgroundListener(ImageView backgroundBlured) {
         backgroundBlured.setOnMouseMoved(event -> {
 
-            for (Button button : buttons) {
+            for (ProgressButton button : buttons) {
                 if (button != null) {
                     double buttonOrigin = Point2D.distance(
                             Screen.getPrimary().getBounds().getWidth() / 2,
@@ -92,11 +92,11 @@ public class MenuPane extends Pane {
                             event.getY());
 
                     if (mouseButton < buttonOrigin) {
-                        button.setPrefWidth(50 + 25 * (mouseOrigin / buttonOrigin));
-                        button.setPrefHeight(50 + 25 * (mouseOrigin / buttonOrigin));
+                        button.setPrefWidth(150 + 50 * (mouseOrigin / buttonOrigin));
+                        button.setPrefHeight(150 + 50 * (mouseOrigin / buttonOrigin));
                     } else {
-                        button.setPrefWidth(50);
-                        button.setPrefHeight(50);
+                        button.setPrefWidth(150);
+                        button.setPrefHeight(150);
                     }
                 }
             }
@@ -105,11 +105,11 @@ public class MenuPane extends Pane {
 
     public void createCircularButtons() {
         for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).setPrefWidth(50);
-            buttons.get(i).setPrefHeight(50);
-            buttons.get(i).setShape(new Circle(50));
-            buttons.get(i).layoutXProperty().bind(closeMenuButton.layoutXProperty().add(200 * Math.cos(Math.toRadians(i * 360d / buttons.size()))));
-            buttons.get(i).layoutYProperty().bind(closeMenuButton.layoutYProperty().add(200 * Math.sin(Math.toRadians(i * 360d / buttons.size()))));
+            buttons.get(i).setPrefWidth(150);
+            buttons.get(i).setPrefHeight(150);
+            buttons.get(i).getButton().setRadius(75);
+            buttons.get(i).layoutXProperty().bind(closeMenuButton.layoutXProperty().add(250 * Math.cos(Math.toRadians(i * 360d / buttons.size()))).subtract(50));
+            buttons.get(i).layoutYProperty().bind(closeMenuButton.layoutYProperty().add(250 * Math.sin(Math.toRadians(i * 360d / buttons.size()))).subtract(50));
             this.getChildren().add(buttons.get(i));
 
             int index = i;
@@ -119,7 +119,7 @@ public class MenuPane extends Pane {
         }
     }
 
-    public void setButtons(LinkedList<Button> buttons){
+    public void setButtons(LinkedList<ProgressButton> buttons){
         this.buttons = buttons;
     }
 }

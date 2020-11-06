@@ -1,5 +1,6 @@
 package main;
 
+import main.gaze.devicemanager.AbstractGazeDeviceManager;
 import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,11 +13,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        TobiiGazeDeviceManager tgdm = new TobiiGazeDeviceManager();
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("Hello World");
-        Scene scene = new Scene(new HomeScreen(primaryStage,tgdm), Color.TRANSPARENT);
+        Scene scene = new Scene(new HomeScreen(primaryStage), Color.TRANSPARENT);
         primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth());
         primaryStage.setHeight(Screen.getPrimary().getBounds().getHeight());
 

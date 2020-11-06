@@ -1,4 +1,4 @@
-package main.gaze;
+package main.gaze.devicemanager;
 
 import javafx.geometry.Point2D;
 

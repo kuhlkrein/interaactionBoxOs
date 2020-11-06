@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.SecondStage;
+import main.gaze.devicemanager.AbstractGazeDeviceManager;
+import main.gaze.devicemanager.TobiiGazeDeviceManager;
 
 import java.io.File;
 
@@ -17,7 +19,7 @@ public interface AppProcess {
 
     void init();
 
-    StackPane createButton(BorderPane borderPane, SecondStage stage);
+    StackPane createButton(BorderPane borderPane, SecondStage stage, AbstractGazeDeviceManager tgdm);
 
     default Button initButton(String ressourcePath, BorderPane borderPane) {
         Button newButton = new Button();

@@ -1,6 +1,5 @@
 package main.gaze.devicemanager;
 
-import main.gaze.GazeMotionListener;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -8,7 +7,6 @@ import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
