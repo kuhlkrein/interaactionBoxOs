@@ -8,3 +8,7 @@
 /src/gradle
 .gradle
 .idea
+/gradle/
+/.idea/
+/.gradle/
+/build/
