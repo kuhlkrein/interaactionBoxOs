@@ -1,5 +1,7 @@
 package main;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import main.gaze.devicemanager.AbstractGazeDeviceManager;
 import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Platform;
@@ -71,15 +73,18 @@ public class HomeScreen extends BorderPane {
         ProgressButton augComProcessButton =augComProcess.createButton(this, secondStage,tgdm);
         ProgressButton gazePlayProcessButton =gazePlayProcess.createButton(this, secondStage,tgdm);
         HBox menuBar = new HBox(
-                youtubeProgressButton,
-                augComProcessButton,
-                gazePlayProcessButton
+                new VBox(youtubeProgressButton,new Label("Youtube")),
+                new VBox(augComProcessButton,new Label("AugCom")),
+                new VBox(gazePlayProcessButton,new Label("GazePlay"))
         );
         tgdm.addEventFilter(youtubeProgressButton.getButton());
         tgdm.addEventFilter(augComProcessButton.getButton());
         tgdm.addEventFilter(gazePlayProcessButton.getButton());
 
         menuBar.setAlignment(Pos.CENTER);
+        menuBar.getChildren().forEach(n->{
+            ((VBox)n).setAlignment(Pos.CENTER);
+        });
         BorderPane.setAlignment(menuBar, Pos.CENTER);
 
         menuBar.spacingProperty().bind(this.widthProperty().divide(8));

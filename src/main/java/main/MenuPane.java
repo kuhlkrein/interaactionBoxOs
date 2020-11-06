@@ -78,25 +78,28 @@ public class MenuPane extends Pane {
                     double buttonOrigin = Point2D.distance(
                             Screen.getPrimary().getBounds().getWidth() / 2,
                             Screen.getPrimary().getBounds().getHeight() / 2,
-                            button.getLayoutX(),
-                            button.getLayoutY());
+                            button.getLayoutX()+button.getPrefWidth()/2,
+                            button.getLayoutY()+button.getPrefHeight()/2);
                     double mouseOrigin = Point2D.distance(
                             Screen.getPrimary().getBounds().getWidth() / 2,
                             Screen.getPrimary().getBounds().getHeight() / 2,
                             event.getX(),
                             event.getY());
                     double mouseButton = Point2D.distance(
-                            button.getLayoutX(),
-                            button.getLayoutY(),
+                            button.getLayoutX()+button.getPrefWidth()/2,
+                            button.getLayoutY()+button.getPrefHeight()/2,
                             event.getX(),
                             event.getY());
 
                     if (mouseButton < buttonOrigin) {
-                        button.setPrefWidth(150 + 50 * (mouseOrigin / buttonOrigin));
-                        button.setPrefHeight(150 + 50 * (mouseOrigin / buttonOrigin));
+                        double factor = (mouseOrigin / buttonOrigin) > 1 ? 1 : (mouseOrigin / buttonOrigin);
+                        button.setPrefWidth(150 + 50 * factor);
+                        button.setPrefHeight(150 + 50 * factor);
+                        button.getButton().setRadius(75 + 25 * factor);
                     } else {
                         button.setPrefWidth(150);
                         button.setPrefHeight(150);
+                        button.getButton().setRadius(75);
                     }
                 }
             }
