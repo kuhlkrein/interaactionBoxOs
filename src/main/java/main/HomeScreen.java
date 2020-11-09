@@ -70,21 +70,21 @@ public class HomeScreen extends BorderPane {
         GazePlayProcess gazePlayProcess = new GazePlayProcess();
 
         ProgressButton youtubeProgressButton = youtubeProcess.createButton(this, secondStage, tgdm);
+        youtubeProgressButton.getLabel().setText("Youtube");
         ProgressButton augComProcessButton =augComProcess.createButton(this, secondStage,tgdm);
+        augComProcessButton.getLabel().setText("AugCom");
         ProgressButton gazePlayProcessButton =gazePlayProcess.createButton(this, secondStage,tgdm);
+        gazePlayProcessButton.getLabel().setText("GazePlay");
         HBox menuBar = new HBox(
-                new VBox(youtubeProgressButton,new Label("Youtube")),
-                new VBox(augComProcessButton,new Label("AugCom")),
-                new VBox(gazePlayProcessButton,new Label("GazePlay"))
+                youtubeProgressButton,
+               augComProcessButton,
+                gazePlayProcessButton
         );
         tgdm.addEventFilter(youtubeProgressButton.getButton());
         tgdm.addEventFilter(augComProcessButton.getButton());
         tgdm.addEventFilter(gazePlayProcessButton.getButton());
 
         menuBar.setAlignment(Pos.CENTER);
-        menuBar.getChildren().forEach(n->{
-            ((VBox)n).setAlignment(Pos.CENTER);
-        });
         BorderPane.setAlignment(menuBar, Pos.CENTER);
 
         menuBar.spacingProperty().bind(this.widthProperty().divide(8));

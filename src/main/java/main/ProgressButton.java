@@ -1,5 +1,9 @@
 package main;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import main.gaze.devicemanager.GazeEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -28,16 +32,27 @@ public class ProgressButton extends StackPane {
     private EventHandler<Event> exitbuttonHandler;
     private boolean inuse = false;
 
-    @Getter
-    private ImageView image;
+    private VBox imageAndText;
 
     public ProgressButton() {
         super();
         button = new Circle();
         button.setFill(Color.LIGHTGREY);
         init();
-        image = new ImageView();
-        this.getChildren().addAll(button, image, indicator);
+        ImageView image = new ImageView();
+        Label text = new Label();
+        this.imageAndText = new VBox(image, text);
+        this.imageAndText.setMouseTransparent(true);
+        this.imageAndText.setAlignment(Pos.CENTER);
+        this.getChildren().addAll(button, imageAndText, indicator);
+    }
+
+    public ImageView getImage(){
+        return (ImageView) imageAndText.getChildren().get(0);
+    }
+
+    public Label getLabel(){
+        return (Label) imageAndText.getChildren().get(1);
     }
 
     public void active() {
@@ -64,9 +79,8 @@ public class ProgressButton extends StackPane {
     }
 
     public void setImage(final ImageView img) {
-        image = img;
-        image.setMouseTransparent(true);
-        this.getChildren().set(1, image);
+        img.setMouseTransparent(true);
+        this.imageAndText.getChildren().set(0, img);
     }
 
     public void active2() {
@@ -93,7 +107,7 @@ public class ProgressButton extends StackPane {
             buttonHeight = newVal.doubleValue();
             double width = newVal.doubleValue() * 2;
             width = (width * 90) / 100;
-            image.setFitWidth(width);
+            this.getImage().setFitWidth(width);
         });
 
         indicator.setOpacity(0);

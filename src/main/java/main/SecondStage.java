@@ -54,7 +54,7 @@ public class SecondStage extends Stage {
             buttons.add(new ProgressButton());
             switch (i) {
                 case 0:
-                    //buttons.get(i).setText("exit");
+                    buttons.get(i).getLabel().setText("Exit");
                     eventhandler = e -> {
                         if (proc != null) {
                             proc.destroy();
@@ -65,6 +65,7 @@ public class SecondStage extends Stage {
                     };
                     break;
                 case 1:
+                    buttons.get(i).getLabel().setText("AugCom");
                     f = new File("src/ressources/images/angular.png");
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
@@ -82,6 +83,7 @@ public class SecondStage extends Stage {
                     };
                     break;
                 case 2:
+                    buttons.get(i).getLabel().setText("Youtube");
                     f = new File("src/ressources/images/yt.png");
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
@@ -99,6 +101,7 @@ public class SecondStage extends Stage {
                     };
                     break;
                 case 3:
+                    buttons.get(i).getLabel().setText("GazePlay");
                     f = new File("src/ressources/images/gazeplayicon.png");
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
@@ -116,7 +119,7 @@ public class SecondStage extends Stage {
                     };
                     break;
                 case 4:
-                   // buttons.get(i).setText("menu");
+                    buttons.get(i).getLabel().setText("Menu");
                     eventhandler = (event) -> {
                         if (proc != null) {
                             proc.destroy();
@@ -130,12 +133,10 @@ public class SecondStage extends Stage {
                 default:
                     break;
             }
-            if (eventhandler != null) {
-                buttons.get(i).setOnMouseClicked(eventhandler);
-                buttons.get(i).assignIndicator(eventhandler,500);
-                buttons.get(i).active();
-                tgdm.addEventFilter(buttons.get(i));
-            }
+            buttons.get(i).setOnMouseClicked(eventhandler);
+            buttons.get(i).assignIndicator(eventhandler,500);
+            buttons.get(i).active();
+            tgdm.addEventFilter(buttons.get(i));
         }
         return buttons;
     }
