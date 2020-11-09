@@ -22,7 +22,7 @@ public class MenuPane extends Pane {
     final Stage primaryStage;
     final Button closeMenuButton;
 
-    public MenuPane(Stage primaryStage){
+    public MenuPane(Stage primaryStage) {
         super();
         this.primaryStage = primaryStage;
         this.setStyle("-fx-background-color: transparent;");
@@ -42,11 +42,11 @@ public class MenuPane extends Pane {
         this.getChildren().add(closeMenuButton);
     }
 
-    public void setCloseMenuHandler(EventHandler<MouseEvent> eventHandler){
+    public void setCloseMenuHandler(EventHandler<MouseEvent> eventHandler) {
         closeMenuButton.setOnMouseClicked(eventHandler);
     }
 
-    public Button createCloseMenuButton(){
+    public Button createCloseMenuButton() {
         Button closeButton = new Button();
         closeButton.setPrefWidth(50);
         closeButton.setPrefHeight(50);
@@ -78,16 +78,16 @@ public class MenuPane extends Pane {
                     double buttonOrigin = Point2D.distance(
                             Screen.getPrimary().getBounds().getWidth() / 2,
                             Screen.getPrimary().getBounds().getHeight() / 2,
-                            button.getLayoutX()+button.getPrefWidth()/2,
-                            button.getLayoutY()+button.getPrefHeight()/2);
+                            button.getLayoutX() + button.getPrefWidth() / 2,
+                            button.getLayoutY() + button.getPrefHeight() / 2);
                     double mouseOrigin = Point2D.distance(
                             Screen.getPrimary().getBounds().getWidth() / 2,
                             Screen.getPrimary().getBounds().getHeight() / 2,
                             event.getX(),
                             event.getY());
                     double mouseButton = Point2D.distance(
-                            button.getLayoutX()+button.getPrefWidth()/2,
-                            button.getLayoutY()+button.getPrefHeight()/2,
+                            button.getLayoutX() + button.getPrefWidth() / 2,
+                            button.getLayoutY() + button.getPrefHeight() / 2,
                             event.getX(),
                             event.getY());
 
@@ -122,7 +122,7 @@ public class MenuPane extends Pane {
         }
     }
 
-    public void setButtons(LinkedList<ProgressButton> buttons){
+    public void setButtons(LinkedList<ProgressButton> buttons) {
         this.buttons = buttons;
     }
 }

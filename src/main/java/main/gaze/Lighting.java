@@ -1,6 +1,5 @@
 package main.gaze;
 
-import main.gaze.devicemanager.GazeEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.SequentialTransition;
@@ -12,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import main.gaze.devicemanager.GazeEvent;
 
 /**
  * Created by schwab on 10/09/2016.
@@ -32,7 +32,7 @@ public class Lighting extends Parent {
 
         EventHandler<Event> enterEvent = e -> {
             if ((e.getEventType() == MouseEvent.MOUSE_ENTERED || e.getEventType() == MouseEvent.MOUSE_MOVED
-                || e.getEventType() == GazeEvent.GAZE_ENTERED || e.getEventType() == GazeEvent.GAZE_MOVED)) {
+                    || e.getEventType() == GazeEvent.GAZE_ENTERED || e.getEventType() == GazeEvent.GAZE_MOVED)) {
                 enter();
             }
         };
@@ -47,7 +47,7 @@ public class Lighting extends Parent {
 
         timeline.getKeyFrames().add(new KeyFrame(new Duration(1), new KeyValue(pixel.fillProperty(), lightingColor)));
         timeline2.getKeyFrames()
-            .add(new KeyFrame(new Duration(lightingLength), new KeyValue(pixel.fillProperty(), Color.BLACK)));
+                .add(new KeyFrame(new Duration(lightingLength), new KeyValue(pixel.fillProperty(), Color.BLACK)));
 
         SequentialTransition sequence = new SequentialTransition(timeline, timeline2);
 

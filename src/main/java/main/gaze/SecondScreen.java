@@ -37,11 +37,11 @@ public class SecondScreen implements GazeMotionListener {
         for (int i = 0; i < lightingArray.length; i++) {
             for (int j = 0; j < lightingArray[i].length; j++) {
                 lightingArray[i][j] = new Lighting(
-                    i * pixelWidth,
-                    j * pixelWidth,
-                    pixelWidth,
-                    lightingLength,
-                    lightingColor
+                        i * pixelWidth,
+                        j * pixelWidth,
+                        pixelWidth,
+                        lightingLength,
+                        lightingColor
                 );
                 root.getChildren().add(lightingArray[i][j]);
             }
@@ -59,7 +59,7 @@ public class SecondScreen implements GazeMotionListener {
         final int y = (int) (rawCoordinates.getY() / pixelWidth);
 
         if ((x < 0 || x >= lightingArray.length) ||
-            (y < 0 || y >= lightingArray[x].length)) {
+                (y < 0 || y >= lightingArray[x].length)) {
             return;
         }
 

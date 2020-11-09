@@ -61,7 +61,7 @@ public class StageUtils {
         primaryStage.show();
     }
 
-    public void onFrontThread(Stage primaryStage){
+    public void onFrontThread(Stage primaryStage) {
         Thread t = new Thread(() -> {
             while (true) {
                 Platform.runLater(() -> {

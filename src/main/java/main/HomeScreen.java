@@ -1,9 +1,5 @@
 package main;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import main.gaze.devicemanager.AbstractGazeDeviceManager;
-import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -12,6 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import main.gaze.devicemanager.AbstractGazeDeviceManager;
+import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import main.process.AugComProcess;
 import main.process.GazePlayProcess;
 import main.process.YoutubeProcess;
@@ -32,7 +30,7 @@ public class HomeScreen extends BorderPane {
     HomeScreen(Stage primaryStage) {
         super();
         this.primaryStage = primaryStage;
-        if(selectionMode == GAZE_INTERACTION) {
+        if (selectionMode == GAZE_INTERACTION) {
             this.tgdm = new TobiiGazeDeviceManager();
         } else {
             this.tgdm = new AbstractGazeDeviceManager() {
@@ -71,13 +69,13 @@ public class HomeScreen extends BorderPane {
 
         ProgressButton youtubeProgressButton = youtubeProcess.createButton(this, secondStage, tgdm);
         youtubeProgressButton.getLabel().setText("Youtube");
-        ProgressButton augComProcessButton =augComProcess.createButton(this, secondStage,tgdm);
+        ProgressButton augComProcessButton = augComProcess.createButton(this, secondStage, tgdm);
         augComProcessButton.getLabel().setText("AugCom");
-        ProgressButton gazePlayProcessButton =gazePlayProcess.createButton(this, secondStage,tgdm);
+        ProgressButton gazePlayProcessButton = gazePlayProcess.createButton(this, secondStage, tgdm);
         gazePlayProcessButton.getLabel().setText("GazePlay");
         HBox menuBar = new HBox(
                 youtubeProgressButton,
-               augComProcessButton,
+                augComProcessButton,
                 gazePlayProcessButton
         );
         tgdm.addEventFilter(youtubeProgressButton.getButton());
@@ -93,8 +91,8 @@ public class HomeScreen extends BorderPane {
 
     private void createSecondStage() {
         secondStage = new SecondStage(primaryStage, tgdm);
-        if(selectionMode == GAZE_INTERACTION) {
-            ((TobiiGazeDeviceManager)tgdm).init(secondStage);
+        if (selectionMode == GAZE_INTERACTION) {
+            ((TobiiGazeDeviceManager) tgdm).init(secondStage);
         }
     }
 

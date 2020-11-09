@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import main.SecondStage;
 import main.gaze.devicemanager.AbstractGazeDeviceManager;
-import main.gaze.devicemanager.TobiiGazeDeviceManager;
 
 import java.io.File;
 

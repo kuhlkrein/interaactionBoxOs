@@ -30,10 +30,10 @@ public class SecondScreenFactory {
 
         final Group root = new Group();
         final Scene scene = new Scene(
-            root,
-            screen1.getBounds().getWidth(),
-            screen1.getBounds().getHeight(),
-            Color.BLACK
+                root,
+                screen1.getBounds().getWidth(),
+                screen1.getBounds().getHeight(),
+                Color.BLACK
         );
 
         final Lighting[][] lightingArray = SecondScreen.makeLighting(root, screen2.getBounds());

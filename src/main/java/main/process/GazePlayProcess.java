@@ -1,13 +1,11 @@
 package main.process;
 
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import main.ProgressButton;
 import main.SecondStage;
 import main.gaze.devicemanager.AbstractGazeDeviceManager;
-import main.gaze.devicemanager.TobiiGazeDeviceManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class GazePlayProcess implements AppProcess {
     }
 
     private ProcessBuilder createGazePlayBuilder() {
-        String javaBin =  "C:\\Program Files (x86)\\GazePlay\\lib\\jre\\bin\\java.exe";
+        String javaBin = "C:\\Program Files (x86)\\GazePlay\\lib\\jre\\bin\\java.exe";
         String classpath = "C:\\Program Files (x86)\\GazePlay\\lib\\*";
 
         LinkedList<String> commands = new LinkedList<>(Arrays.asList(javaBin, "-cp", classpath, "net.gazeplay.GazePlayLauncher"));
@@ -57,7 +55,7 @@ public class GazePlayProcess implements AppProcess {
         pb.setImage(logo);
         pb.assignIndicator((e) -> {
             stage.proc = this.start();
-        },500);
+        }, 500);
         // Button button = initButton("src/ressources/images/angular.png", borderPane);
         this.init();
         pb.active();

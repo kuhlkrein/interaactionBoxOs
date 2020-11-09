@@ -4,16 +4,12 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.gaze.devicemanager.AbstractGazeDeviceManager;
-import main.gaze.devicemanager.GazeEvent;
-import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import main.process.AugComProcess;
 import main.process.GazePlayProcess;
 import main.process.YoutubeProcess;
@@ -38,7 +34,7 @@ public class SecondStage extends Stage {
             }
             this.hide();
         });
-        secondSageRoot.buttons=setButtons(primaryStage);
+        secondSageRoot.buttons = setButtons(primaryStage);
         secondSageRoot.createCircularButtons();
 
         Scene scene = new Scene(secondSageRoot, Color.TRANSPARENT);
@@ -70,7 +66,7 @@ public class SecondStage extends Stage {
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
-                   // buttons.get(i).setText("");
+                    // buttons.get(i).setText("");
                     buttons.get(i).setImage(logo);
                     eventhandler = e -> {
                         if (proc != null) {
@@ -106,7 +102,7 @@ public class SecondStage extends Stage {
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
-                   // buttons.get(i).setText("");
+                    // buttons.get(i).setText("");
                     buttons.get(i).setImage(logo);
                     eventhandler = e -> {
                         if (proc != null) {
@@ -134,7 +130,7 @@ public class SecondStage extends Stage {
                     break;
             }
             buttons.get(i).setOnMouseClicked(eventhandler);
-            buttons.get(i).assignIndicator(eventhandler,500);
+            buttons.get(i).assignIndicator(eventhandler, 500);
             buttons.get(i).active();
             tgdm.addEventFilter(buttons.get(i));
         }

@@ -1,7 +1,5 @@
 package main;
 
-import main.gaze.devicemanager.AbstractGazeDeviceManager;
-import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;

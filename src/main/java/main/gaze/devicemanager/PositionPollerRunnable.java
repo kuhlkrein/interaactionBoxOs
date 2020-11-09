@@ -1,6 +1,5 @@
 package main.gaze.devicemanager;
 
-import javafx.application.Platform;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -29,11 +28,11 @@ public class PositionPollerRunnable implements Runnable {
     @Override
     public void run() {
         while (!stopRequested) {
-                try {
-                    poll();
-                } catch (final RuntimeException e) {
-                    log.warn("Exception while polling position of main.gaze", e);
-                }
+            try {
+                poll();
+            } catch (final RuntimeException e) {
+                log.warn("Exception while polling position of main.gaze", e);
+            }
 
 
             // sleep is mandatory to avoid too much calls to gazePosition()
@@ -57,12 +56,12 @@ public class PositionPollerRunnable implements Runnable {
 
 
         final double offsetX = 0;
-        final double offsetY =0;
+        final double offsetY = 0;
 
         final Point2D point = new Point2D(positionX + offsetX, positionY + offsetY);
 
-        robot.mouseMove((int)point.getX(),(int) point.getY());
-      //  Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
+        robot.mouseMove((int) point.getX(), (int) point.getY());
+        //  Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
     }
 
 }

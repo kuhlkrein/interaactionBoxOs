@@ -6,7 +6,6 @@ import javafx.scene.layout.BorderPane;
 import main.ProgressButton;
 import main.SecondStage;
 import main.gaze.devicemanager.AbstractGazeDeviceManager;
-import main.gaze.devicemanager.TobiiGazeDeviceManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,11 +45,11 @@ public class AugComProcess implements AppProcess {
         logo.fitWidthProperty().bind(pb.getButton().radiusProperty().multiply(0.7));
         logo.fitHeightProperty().bind(pb.getButton().radiusProperty().multiply(0.7));
         logo.setPreserveRatio(true);
-       pb.setImage(logo);
-       pb.assignIndicator((e) -> {
-           stage.proc = this.start();
-       },500);
-       // Button button = initButton("src/ressources/images/angular.png", borderPane);
+        pb.setImage(logo);
+        pb.assignIndicator((e) -> {
+            stage.proc = this.start();
+        }, 500);
+        // Button button = initButton("src/ressources/images/angular.png", borderPane);
         this.init();
         pb.active();
         return pb;

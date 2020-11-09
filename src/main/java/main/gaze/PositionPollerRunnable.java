@@ -1,12 +1,12 @@
 package main.gaze;
 
-import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import lombok.Setter;
-import tobii.Tobii;
 import lombok.extern.slf4j.Slf4j;
+import main.gaze.devicemanager.TobiiGazeDeviceManager;
+import tobii.Tobii;
 
 import java.util.function.Supplier;
 

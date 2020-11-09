@@ -1,24 +1,23 @@
 package main;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import main.gaze.devicemanager.GazeEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import main.gaze.devicemanager.GazeEvent;
 
 @Slf4j
 public class ProgressButton extends StackPane {
@@ -47,11 +46,11 @@ public class ProgressButton extends StackPane {
         this.getChildren().addAll(button, imageAndText, indicator);
     }
 
-    public ImageView getImage(){
+    public ImageView getImage() {
         return (ImageView) imageAndText.getChildren().get(0);
     }
 
-    public Label getLabel(){
+    public Label getLabel() {
         return (Label) imageAndText.getChildren().get(1);
     }
 

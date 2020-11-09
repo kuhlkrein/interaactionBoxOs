@@ -20,14 +20,13 @@ public class TobiiGazeDeviceManager extends AbstractGazeDeviceManager {
 
     public void init(SecondStage stage) {
         try {
-            positionPollerRunnable = new PositionPollerRunnable( this, stage);
+            positionPollerRunnable = new PositionPollerRunnable(this, stage);
         } catch (AWTException e) {
             e.printStackTrace();
         }
         executorService = Executors.newSingleThreadExecutor();
         executorService.submit(positionPollerRunnable);
     }
-
 
 
     @Override
