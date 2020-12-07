@@ -14,6 +14,12 @@ import java.util.LinkedList;
 
 public class GazePlayProcess implements AppProcess {
     ProcessBuilder pb;
+    String gazePlayInstallationRepo;
+
+    public GazePlayProcess( String gazePlayInstallationRepo){
+        super();
+        this.gazePlayInstallationRepo = gazePlayInstallationRepo;
+    }
 
     @Override
     public Process start() {
@@ -31,8 +37,8 @@ public class GazePlayProcess implements AppProcess {
     }
 
     private ProcessBuilder createGazePlayBuilder() {
-        String javaBin = "C:\\Program Files (x86)\\GazePlay\\lib\\jre\\bin\\java.exe";
-        String classpath = "C:\\Program Files (x86)\\GazePlay\\lib\\*";
+        String javaBin = gazePlayInstallationRepo + "\\lib\\jre\\bin\\java.exe";
+        String classpath = gazePlayInstallationRepo + "\\lib\\*";
 
         LinkedList<String> commands = new LinkedList<>(Arrays.asList(javaBin, "-cp", classpath, "net.gazeplay.GazePlayLauncher"));
 

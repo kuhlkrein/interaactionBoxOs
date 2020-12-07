@@ -27,7 +27,7 @@ public class HomeScreen extends BorderPane {
     public SecondStage secondStage;
     final AbstractGazeDeviceManager tgdm;
 
-    HomeScreen(Stage primaryStage) {
+    HomeScreen(Stage primaryStage, String gazePlayInstallationRepo) {
         super();
         this.primaryStage = primaryStage;
         if (selectionMode == GAZE_INTERACTION) {
@@ -51,8 +51,8 @@ public class HomeScreen extends BorderPane {
 
         this.getChildren().add(backgroundBlured);
 
-        createSecondStage();
-        HBox menuBar = createMenuBar();
+        createSecondStage(gazePlayInstallationRepo);
+        HBox menuBar = createMenuBar(gazePlayInstallationRepo);
 
         this.setCenter(menuBar);
 
@@ -62,10 +62,10 @@ public class HomeScreen extends BorderPane {
     }
 
 
-    private HBox createMenuBar() {
+    private HBox createMenuBar(String gazePlayInstallationRepo) {
         YoutubeProcess youtubeProcess = new YoutubeProcess();
         AugComProcess augComProcess = new AugComProcess();
-        GazePlayProcess gazePlayProcess = new GazePlayProcess();
+        GazePlayProcess gazePlayProcess = new GazePlayProcess(gazePlayInstallationRepo);
 
         ProgressButton youtubeProgressButton = youtubeProcess.createButton(this, secondStage, tgdm);
         youtubeProgressButton.getLabel().setText("Youtube");
@@ -89,8 +89,8 @@ public class HomeScreen extends BorderPane {
         return menuBar;
     }
 
-    private void createSecondStage() {
-        secondStage = new SecondStage(primaryStage, tgdm);
+    private void createSecondStage(String gazePlayInstallationRepo) {
+        secondStage = new SecondStage(primaryStage, tgdm, gazePlayInstallationRepo);
         if (selectionMode == GAZE_INTERACTION) {
             ((TobiiGazeDeviceManager) tgdm).init(secondStage);
         }
