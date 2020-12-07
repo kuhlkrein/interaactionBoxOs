@@ -42,8 +42,6 @@ public class GazePlayProcess implements AppProcess {
 
         LinkedList<String> commands = new LinkedList<>(Arrays.asList(javaBin, "-cp", classpath, "net.gazeplay.GazePlayLauncher"));
 
-        System.out.println(javaBin + " " + "-cp" + " " + classpath + " " + "net.gazeplay.GazePlayLauncher");
-
         return new ProcessBuilder(commands);
     }
 
