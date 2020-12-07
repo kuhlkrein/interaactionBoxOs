@@ -22,7 +22,7 @@ public class SecondStage extends Stage {
     public AbstractGazeDeviceManager tgdm;
 
 
-    public SecondStage(Stage primaryStage, AbstractGazeDeviceManager tgdm) {
+    public SecondStage(Stage primaryStage, AbstractGazeDeviceManager tgdm, String gazePlayInstallationRepo) {
         super();
         this.initStyle(StageStyle.TRANSPARENT);
         this.tgdm = tgdm;
@@ -34,14 +34,14 @@ public class SecondStage extends Stage {
             }
             this.hide();
         });
-        secondSageRoot.buttons = setButtons(primaryStage);
+        secondSageRoot.buttons = setButtons(primaryStage, gazePlayInstallationRepo);
         secondSageRoot.createCircularButtons();
 
         Scene scene = new Scene(secondSageRoot, Color.TRANSPARENT);
         this.setScene(scene);
     }
 
-    public LinkedList<ProgressButton> setButtons(Stage primaryStage) {
+    public LinkedList<ProgressButton> setButtons(Stage primaryStage, String gazePlayInstallationRepo) {
         EventHandler<Event> eventhandler = null;
         File f;
         ImageView logo;
@@ -109,7 +109,7 @@ public class SecondStage extends Stage {
                             proc.destroy();
                             proc = null;
                         }
-                        GazePlayProcess gazePlayProcess = new GazePlayProcess();
+                        GazePlayProcess gazePlayProcess = new GazePlayProcess(gazePlayInstallationRepo);
                         gazePlayProcess.init();
                         proc = gazePlayProcess.start();
                     };
