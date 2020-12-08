@@ -4,7 +4,6 @@
 /.gradle
 /src/.gradle
 /src/build
-/src/gradle
 .gradle
 .idea
 /.idea/
