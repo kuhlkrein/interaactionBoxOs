@@ -48,7 +48,7 @@ public class GazePlayProcess implements AppProcess {
     @Override
     public ProgressButton createButton(BorderPane borderPane, SecondStage stage, AbstractGazeDeviceManager tgdm) {
         ProgressButton pb = new ProgressButton();
-        File f = new File("src/ressources/images/gazeplayicon.png");
+        File f = new File(ClassLoader.getSystemResource("images/gazeplayicon.png").getPath());
         ImageView logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
         pb.getButton().setRadius(100);
         logo.setFitWidth(pb.getButton().getRadius() * 0.7);
@@ -60,7 +60,7 @@ public class GazePlayProcess implements AppProcess {
         pb.assignIndicator((e) -> {
             stage.proc = this.start();
         }, 500);
-        // Button button = initButton("src/ressources/images/angular.png", borderPane);
+        // Button button = initButton("src/resources/images/angular.png", borderPane);
         this.init();
         pb.active();
         return pb;

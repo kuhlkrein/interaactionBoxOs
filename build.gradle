@@ -16,10 +16,17 @@ plugins {
     id 'io.freefair.lombok' version '4.1.4'
 }
 
+ext.javafxVersion = "11.0.2"
+
 // Make it available everywhere via the project ext:
 ext {
     Download = de.undercouch.gradle.tasks.download.Download
     download = download
+}
+
+javafx {
+    version = javafxVersion
+    modules = ['javafx.controls', 'javafx.swing', 'javafx.media', 'javafx.web']
 }
 
 apply plugin: 'java'
@@ -29,11 +36,23 @@ apply plugin: 'maven'
 apply plugin: 'jacoco'
 apply plugin: 'distribution'
 
-
-ext.javafxVersion = "11.0.2"
 apply from: "${rootDir}/gradle/package.gradle"
 apply from: "${rootDir}/gradle/jre.gradle"
 apply from: "${rootDir}/gradle/drivers.gradle"
+
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/resources"
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+}
 
 allprojects {
     group = 'com.github.gazePlay'
@@ -48,7 +67,6 @@ allprojects {
         }
     }
 }
-
 
 dependencies {
     compile 'com.github.GazePlay:TobiiStreamEngineForJava:5.0'
@@ -107,13 +125,19 @@ distributions {
     }
 }
 
-
 task('downloadAndExtractLinuxDependecies').dependsOn('downloadAndExtractLinuxJREwithLibavPlugin', 'downloadAndExtractTobiiDriversForLinux')
-
-mainClassName = 'main.Main'
 
 windowsDistZip.dependsOn(downloadAndExtractWindowsJRE)
 linuxDistTar.dependsOn(downloadAndExtractLinuxDependecies)
+
+tasks.withType(Tar){
+    compression = Compression.GZIP
+    archiveExtension.set('tar.gz')
+}
+
+distZip {
+    duplicatesStrategy = 'exclude'
+}
 
 tasks.withType(Tar){
     compression = Compression.GZIP

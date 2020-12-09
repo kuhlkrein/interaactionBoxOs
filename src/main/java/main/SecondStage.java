@@ -62,7 +62,7 @@ public class SecondStage extends Stage {
                     break;
                 case 1:
                     buttons.get(i).getLabel().setText("AugCom");
-                    f = new File("src/ressources/images/angular.png");
+                    f = new File(ClassLoader.getSystemResource("images/angular.png").getPath());
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
@@ -80,7 +80,7 @@ public class SecondStage extends Stage {
                     break;
                 case 2:
                     buttons.get(i).getLabel().setText("Youtube");
-                    f = new File("src/ressources/images/yt.png");
+                    f = new File(ClassLoader.getSystemResource("images/yt.png").getPath());
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
@@ -98,7 +98,7 @@ public class SecondStage extends Stage {
                     break;
                 case 3:
                     buttons.get(i).getLabel().setText("GazePlay");
-                    f = new File("src/ressources/images/gazeplayicon.png");
+                    f = new File(ClassLoader.getSystemResource("images/gazeplayicon.png").getPath());
                     logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);

@@ -27,7 +27,7 @@ public class MenuPane extends Pane {
         this.primaryStage = primaryStage;
         this.setStyle("-fx-background-color: transparent;");
 
-        File f = new File("src/ressources/images/blured.jpg");
+        File f = new File(ClassLoader.getSystemResource("images/blured.jpg").getPath());
         backgroundBlured = new ImageView(new Image("file:" + f.getAbsolutePath()));
 
         setOpacityBackground(0.8);
@@ -56,7 +56,7 @@ public class MenuPane extends Pane {
         closeButton.layoutXProperty().bind(primaryStage.widthProperty().divide(2).subtract(25));
         closeButton.layoutYProperty().bind(primaryStage.heightProperty().divide(2).subtract(25));
 
-        File cross = new File("src/ressources/images/cross.png");
+        File cross = new File(ClassLoader.getSystemResource("images/cross.png").getPath());
         ImageView logo = new ImageView(new Image("file:" + cross.getAbsolutePath()));
         logo.setFitWidth(20);
         logo.setFitHeight(20);

@@ -41,7 +41,7 @@ public class HomeScreen extends BorderPane {
             };
         }
 
-        File f = new File("src/ressources/images/blured.jpg");
+        File f = new File(ClassLoader.getSystemResource("images/blured.jpg").getPath());
         ImageView backgroundBlured = new ImageView(new Image("file:" + f.getAbsolutePath()));
 
         backgroundBlured.setOpacity(0.9);
