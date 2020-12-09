@@ -43,7 +43,6 @@ public class SecondStage extends Stage {
 
     public LinkedList<ProgressButton> setButtons(Stage primaryStage, String gazePlayInstallationRepo) {
         EventHandler<Event> eventhandler = null;
-        File f;
         ImageView logo;
         LinkedList<ProgressButton> buttons = new LinkedList<ProgressButton>();
         for (int i = 0; i < 5; i++) {
@@ -62,8 +61,7 @@ public class SecondStage extends Stage {
                     break;
                 case 1:
                     buttons.get(i).getLabel().setText("AugCom");
-                    f = new File(ClassLoader.getSystemResource("images/angular.png").getPath());
-                    logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
+                    logo = new ImageView(new Image("images/angular.png"));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
                     // buttons.get(i).setText("");
@@ -80,8 +78,7 @@ public class SecondStage extends Stage {
                     break;
                 case 2:
                     buttons.get(i).getLabel().setText("Youtube");
-                    f = new File(ClassLoader.getSystemResource("images/yt.png").getPath());
-                    logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
+                    logo = new ImageView(new Image("images/yt.png"));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
                     //buttons.get(i).setText("");
@@ -98,8 +95,7 @@ public class SecondStage extends Stage {
                     break;
                 case 3:
                     buttons.get(i).getLabel().setText("GazePlay");
-                    f = new File(ClassLoader.getSystemResource("images/gazeplayicon.png").getPath());
-                    logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
+                    logo = new ImageView(new Image("images/gazeplayicon.png"));
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
                     // buttons.get(i).setText("");

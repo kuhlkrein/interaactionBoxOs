@@ -37,8 +37,7 @@ public class AugComProcess implements AppProcess {
     @Override
     public ProgressButton createButton(BorderPane borderPane, SecondStage stage, AbstractGazeDeviceManager tgdm) {
         ProgressButton pb = new ProgressButton();
-        File f = new File(ClassLoader.getSystemResource("images/angular.png").getPath());
-        ImageView logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
+        ImageView logo = new ImageView(new Image("images/angular.png"));
         pb.getButton().setRadius(100);
         logo.setFitWidth(pb.getButton().getRadius() * 0.7);
         logo.setFitHeight(pb.getButton().getRadius() * 0.7);
