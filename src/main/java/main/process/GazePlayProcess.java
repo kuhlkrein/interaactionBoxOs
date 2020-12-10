@@ -59,7 +59,6 @@ public class GazePlayProcess implements AppProcess {
         pb.assignIndicator((e) -> {
             stage.proc = this.start();
         }, 500);
-        // Button button = initButton("src/resources/images/angular.png", borderPane);
         this.init();
         pb.active();
         return pb;

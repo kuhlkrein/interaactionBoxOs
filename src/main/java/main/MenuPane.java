@@ -120,7 +120,4 @@ public class MenuPane extends Pane {
         }
     }
 
-    public void setButtons(LinkedList<ProgressButton> buttons) {
-        this.buttons = buttons;
-    }
 }

@@ -12,6 +12,7 @@ import main.gaze.devicemanager.AbstractGazeDeviceManager;
 import main.gaze.devicemanager.TobiiGazeDeviceManager;
 import main.process.AugComProcess;
 import main.process.GazePlayProcess;
+import main.process.InteraactionSceneProcess;
 import main.process.YoutubeProcess;
 
 import java.awt.*;
@@ -64,27 +65,32 @@ public class HomeScreen extends BorderPane {
     private HBox createMenuBar(String gazePlayInstallationRepo) {
         YoutubeProcess youtubeProcess = new YoutubeProcess();
         AugComProcess augComProcess = new AugComProcess();
+        InteraactionSceneProcess interaactionSceneProcess = new InteraactionSceneProcess();
         GazePlayProcess gazePlayProcess = new GazePlayProcess(gazePlayInstallationRepo);
 
         ProgressButton youtubeProgressButton = youtubeProcess.createButton(this, secondStage, tgdm);
         youtubeProgressButton.getLabel().setText("Youtube");
         ProgressButton augComProcessButton = augComProcess.createButton(this, secondStage, tgdm);
         augComProcessButton.getLabel().setText("AugCom");
+        ProgressButton interaactionSceneProcessButton = interaactionSceneProcess.createButton(this, secondStage, tgdm);
+        interaactionSceneProcessButton.getLabel().setText("InteraactionScene");
         ProgressButton gazePlayProcessButton = gazePlayProcess.createButton(this, secondStage, tgdm);
         gazePlayProcessButton.getLabel().setText("GazePlay");
         HBox menuBar = new HBox(
                 youtubeProgressButton,
                 augComProcessButton,
+                interaactionSceneProcessButton,
                 gazePlayProcessButton
         );
         tgdm.addEventFilter(youtubeProgressButton.getButton());
         tgdm.addEventFilter(augComProcessButton.getButton());
+        tgdm.addEventFilter(interaactionSceneProcessButton.getButton());
         tgdm.addEventFilter(gazePlayProcessButton.getButton());
 
         menuBar.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(menuBar, Pos.CENTER);
 
-        menuBar.spacingProperty().bind(this.widthProperty().divide(8));
+        menuBar.spacingProperty().bind(this.widthProperty().divide(10));
         return menuBar;
     }
 

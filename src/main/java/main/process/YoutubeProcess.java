@@ -48,8 +48,7 @@ public class YoutubeProcess implements AppProcess {
         pb.assignIndicator((e) -> {
             stage.proc = this.start();
         }, 500);
-        // Button button = initButton("src/resources/images/angular.png", borderPane);
-        this.init();
+         this.init();
         pb.active();
         return pb;
     }
