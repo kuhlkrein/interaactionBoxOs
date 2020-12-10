@@ -12,6 +12,7 @@ import javafx.stage.StageStyle;
 import main.gaze.devicemanager.AbstractGazeDeviceManager;
 import main.process.AugComProcess;
 import main.process.GazePlayProcess;
+import main.process.InteraactionSceneProcess;
 import main.process.YoutubeProcess;
 
 import java.io.File;
@@ -43,10 +44,9 @@ public class SecondStage extends Stage {
 
     public LinkedList<ProgressButton> setButtons(Stage primaryStage, String gazePlayInstallationRepo) {
         EventHandler<Event> eventhandler = null;
-        File f;
         ImageView logo;
         LinkedList<ProgressButton> buttons = new LinkedList<ProgressButton>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             buttons.add(new ProgressButton());
             switch (i) {
                 case 0:
@@ -61,9 +61,21 @@ public class SecondStage extends Stage {
                     };
                     break;
                 case 1:
+                    buttons.get(i).getLabel().setText("Menu");
+                    eventhandler = (event) -> {
+                        if (proc != null) {
+                            proc.destroy();
+                            proc = null;
+                        }
+                        primaryStage.show();
+                        primaryStage.toFront();
+                        this.hide();
+                    };
+                    break;
+                case 2:
                     buttons.get(i).getLabel().setText("AugCom");
-                    f = new File("src/ressources/images/angular.png");
-                    logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
+                    logo = new ImageView(new Image("images/angular.png"));
+                    logo.setPreserveRatio(true);
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
                     // buttons.get(i).setText("");
@@ -78,10 +90,28 @@ public class SecondStage extends Stage {
                         proc = augComProcess.start();
                     };
                     break;
-                case 2:
+                case 3:
+                    buttons.get(i).getLabel().setText("InteraactionScene");
+                    logo = new ImageView(new Image("images/angular.png"));
+                    logo.setPreserveRatio(true);
+                    logo.setFitWidth(100);
+                    logo.setFitHeight(100);
+                    // buttons.get(i).setText("");
+                    buttons.get(i).setImage(logo);
+                    eventhandler = e -> {
+                        if (proc != null) {
+                            proc.destroy();
+                            proc = null;
+                        }
+                        InteraactionSceneProcess interaactionSceneProcess = new InteraactionSceneProcess();
+                        interaactionSceneProcess.init();
+                        proc = interaactionSceneProcess.start();
+                    };
+                    break;
+                case 4:
                     buttons.get(i).getLabel().setText("Youtube");
-                    f = new File("src/ressources/images/yt.png");
-                    logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
+                    logo = new ImageView(new Image("images/yt.png"));
+                    logo.setPreserveRatio(true);
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
                     //buttons.get(i).setText("");
@@ -96,10 +126,10 @@ public class SecondStage extends Stage {
                         proc = youtubeProcess.start();
                     };
                     break;
-                case 3:
+                case 5:
                     buttons.get(i).getLabel().setText("GazePlay");
-                    f = new File("src/ressources/images/gazeplayicon.png");
-                    logo = new ImageView(new Image("file:" + f.getAbsolutePath()));
+                    logo = new ImageView(new Image("images/gazeplayicon.png"));
+                    logo.setPreserveRatio(true);
                     logo.setFitWidth(100);
                     logo.setFitHeight(100);
                     // buttons.get(i).setText("");
@@ -114,18 +144,7 @@ public class SecondStage extends Stage {
                         proc = gazePlayProcess.start();
                     };
                     break;
-                case 4:
-                    buttons.get(i).getLabel().setText("Menu");
-                    eventhandler = (event) -> {
-                        if (proc != null) {
-                            proc.destroy();
-                            proc = null;
-                        }
-                        primaryStage.show();
-                        primaryStage.toFront();
-                        this.hide();
-                    };
-                    break;
+
                 default:
                     break;
             }
