@@ -40,11 +40,11 @@ public class GazePlayProcess implements AppProcess {
     private ProcessBuilder createGazePlayBuilder() {
         String javaBin;
         if(UtilsOS.isWindows()) {
-            javaBin = gazePlayInstallationRepo + "\\lib\\jre\\bin\\java.exe";
+            javaBin = gazePlayInstallationRepo + "/lib/jre/bin/java.exe";
         } else {
-            javaBin = gazePlayInstallationRepo + "\\lib\\jre\\bin\\java";
+            javaBin = gazePlayInstallationRepo + "/lib/jre/bin/java";
         }
-        String classpath = gazePlayInstallationRepo + "\\lib\\*";
+        String classpath = gazePlayInstallationRepo + "/lib/*";
 
         LinkedList<String> commands = new LinkedList<>(Arrays.asList(javaBin, "-cp", classpath, "net.gazeplay.GazePlayLauncher"));
 
