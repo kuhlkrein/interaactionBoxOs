@@ -5,6 +5,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import main.Configuration;
 import main.SecondStage;
 import tobii.Tobii;
 
@@ -13,28 +14,27 @@ import java.awt.*;
 @Slf4j
 public class PositionPollerRunnable implements Runnable {
 
-    private final TobiiGazeDeviceManager tobiiGazeDeviceManager;
-    private final SecondStage stage;
     Robot robot = new Robot();
 
     @Setter
     private transient boolean stopRequested = false;
 
-    public PositionPollerRunnable(final TobiiGazeDeviceManager tobiiGazeDeviceManager, SecondStage stage) throws AWTException {
-        this.tobiiGazeDeviceManager = tobiiGazeDeviceManager;
-        this.stage = stage;
+    private final Configuration configuration;
+
+    public PositionPollerRunnable(Configuration configuration) throws AWTException {
+        this.configuration = configuration;
     }
 
     @Override
     public void run() {
         while (!stopRequested) {
             try {
-                poll();
+                if (configuration.isGazeInteraction()) {
+                    poll();
+                }
             } catch (final RuntimeException e) {
                 log.warn("Exception while polling position of main.gaze", e);
             }
-
-
             // sleep is mandatory to avoid too much calls to gazePosition()
             try {
                 Thread.sleep(10);
@@ -60,7 +60,10 @@ public class PositionPollerRunnable implements Runnable {
 
         final Point2D point = new Point2D(positionX + offsetX, positionY + offsetY);
 
-        robot.mouseMove((int) point.getX(), (int) point.getY());
+        configuration.currentPoint = point;
+        if (configuration.waitForUserMove()) {
+            robot.mouseMove((int) point.getX(), (int) point.getY());
+        }
         //  Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
     }
 
