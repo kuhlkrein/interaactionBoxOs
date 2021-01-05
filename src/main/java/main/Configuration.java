@@ -13,10 +13,14 @@ import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class Configuration {
 
-    public Point2D currentPoint = null;
+    public int numberOfLastPositionsToCheck = 200;
+    public LinkedList<Point2D> lastPositions = new LinkedList<>();
+
+    public LinkedList<Point2D> currentPoint = new LinkedList<>();
 
     public final static int MOUSE_INTERACTION = 0;
     public final static int GAZE_INTERACTION = 1;
@@ -24,13 +28,6 @@ public class Configuration {
     boolean userIsMoving = false;
 
     public final Timeline timeline;
-
-    @Setter
-    HomeScreen homeScreen;
-    @Setter
-    OptionsPane optionsPane;
-    @Setter
-    Scene scene;
 
     public Configuration(){
         timeline = new Timeline();
@@ -49,22 +46,18 @@ public class Configuration {
     }
 
     public boolean waitForUserMove(){
-        return !userIsMoving;
-    }
-
-    public void setMode(int newMode){
-        selectionMode.setValue(newMode);
+        return !userIsMoving || lasPositionDidntMoved();
     }
 
     public void analyse(double x, double y){
         if(
-                (currentPoint!=null && !isArround(x,currentPoint.getX()) && !isArround(y,currentPoint.getY()))
+                (currentPoint!=null && currentPoint.size() >0
+                        && !isArround(x,currentPoint.getLast().getX()) && !isArround(y,currentPoint.getLast().getY()))
         ){
-
-            System.out.println(" user move " + x + " - " + y);
-            System.out.println(" gaze move " + currentPoint.getX() + " - " + currentPoint.getY());
+//
+//            System.out.println(" user move " + x + " - " + y);
+//            System.out.println(" gaze move " + currentPoint.getLast().getX() + " - " + currentPoint.getLast().getY());
             this.userIsMoving = true;
-            launchTimeline();
         }
     }
 
@@ -73,6 +66,25 @@ public class Configuration {
     }
 
     public void launchTimeline(){
-        timeline.playFromStart();
+        while(lastPositions.size()>=numberOfLastPositionsToCheck) {
+            lastPositions.pop();
+        }
+        lastPositions.add(new Point2D(MouseInfo.getPointerInfo().getLocation().getX(), MouseInfo.getPointerInfo().getLocation().getY()));
+       // timeline.playFromStart();
+    }
+
+    public boolean lasPositionDidntMoved(){
+        if (lastPositions.size() == numberOfLastPositionsToCheck){
+            Point2D pos = lastPositions.get(0);
+                for (int i = 0; i < numberOfLastPositionsToCheck; i++){
+                    if(!lastPositions.get(i).equals(pos)){
+                        return false;
+                    }
+                }
+                lastPositions.clear();
+                this.userIsMoving = false;
+            return  true;
+        }
+        return false;
     }
 }

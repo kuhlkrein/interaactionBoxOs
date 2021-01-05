@@ -36,24 +36,6 @@ apply plugin: 'maven'
 apply plugin: 'jacoco'
 apply plugin: 'distribution'
 
-apply from: "${rootDir}/gradle/package.gradle"
-apply from: "${rootDir}/gradle/jre.gradle"
-apply from: "${rootDir}/gradle/drivers.gradle"
-
-sourceSets {
-    main {
-        resources {
-            srcDirs "src/resources"
-        }
-    }
-}
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'main.Main'
-    }
-}
-
 allprojects {
     group = 'com.github.gazePlay'
 
@@ -83,70 +65,6 @@ dependencies {
     runtime 'org.slf4j:log4j-over-slf4j:1.7.25'
 }
 
-
-distributions {
-    noJRE {
-        contents {
-            with distributions.main.contents
-            from("build/reports")
-            from("build/bin") {
-                into 'bin'
-            }
-        }
-    }
-
-    windows {
-        contents {
-            with distributions.main.contents
-            from("build/reports")
-            from("build/bin/interaactionBoxOS-windows.bat") {
-                into 'bin'
-            }
-            from("build/jre/windows-x64") {
-                into 'lib/jre'
-            }
-        }
-    }
-
-    linux {
-        contents {
-            with distributions.main.contents
-            from("build/reports")
-            from("build/bin/interaactionBoxOS-linux.sh") {
-                into 'bin'
-            }
-            from("build/jre/linux-x64") {
-                into 'lib/jre'
-            }
-            from("build/tobiiDrivers") {
-                into 'tobiiDrivers'
-            }
-        }
-    }
-}
-
-task('downloadAndExtractLinuxDependecies').dependsOn('downloadAndExtractLinuxJREwithLibavPlugin', 'downloadAndExtractTobiiDriversForLinux')
-
-windowsDistZip.dependsOn(downloadAndExtractWindowsJRE)
-linuxDistTar.dependsOn(downloadAndExtractLinuxDependecies)
-
-tasks.withType(Tar){
-    compression = Compression.GZIP
-    archiveExtension.set('tar.gz')
-}
-
-distZip {
-    duplicatesStrategy = 'exclude'
-}
-
-tasks.withType(Tar){
-    compression = Compression.GZIP
-    archiveExtension.set('tar.gz')
-}
-
-distZip {
-    duplicatesStrategy = 'exclude'
-}
 
 defaultTasks 'clean', 'build'
 startScripts.enabled = false

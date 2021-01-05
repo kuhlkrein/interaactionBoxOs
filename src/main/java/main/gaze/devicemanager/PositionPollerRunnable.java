@@ -6,7 +6,6 @@ import javafx.stage.Screen;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import main.Configuration;
-import main.SecondStage;
 import tobii.Tobii;
 
 import java.awt.*;
@@ -30,6 +29,7 @@ public class PositionPollerRunnable implements Runnable {
         while (!stopRequested) {
             try {
                 if (configuration.isGazeInteraction()) {
+                   configuration.analyse(MouseInfo.getPointerInfo().getLocation().getX(),MouseInfo.getPointerInfo().getLocation().getY());
                     poll();
                 }
             } catch (final RuntimeException e) {
@@ -58,11 +58,16 @@ public class PositionPollerRunnable implements Runnable {
         final double offsetX = 0;
         final double offsetY = 0;
 
-        final Point2D point = new Point2D(positionX + offsetX, positionY + offsetY);
 
-        configuration.currentPoint = point;
         if (configuration.waitForUserMove()) {
+
+            final Point2D point = new Point2D(positionX + offsetX, positionY + offsetY);
             robot.mouseMove((int) point.getX(), (int) point.getY());
+            configuration.currentPoint.add(new Point2D(MouseInfo.getPointerInfo().getLocation().getX(),
+                    MouseInfo.getPointerInfo().getLocation().getY()));
+        } else {
+            System.out.println("HERE");
+            configuration.launchTimeline();
         }
         //  Platform.runLater(() -> tobiiGazeDeviceManager.onGazeUpdate(point, "main/gaze"));
     }

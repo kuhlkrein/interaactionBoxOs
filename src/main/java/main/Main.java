@@ -6,44 +6,19 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.gaze.devicemanager.TobiiGazeDeviceManager;
 
 import java.util.List;
 
 public class Main extends Application {
 
-    public String getGazePlayInstallationRepo(){
-        Parameters parameters = getParameters ();
-        List<String> rawArguments = parameters.getRaw ();
-        if(rawArguments.size() > 0){
-            return rawArguments.get(0);
-        } else {
-            return "C:/Program Files (x86)/GazePlay";
-        }
-    }
-
+    TobiiGazeDeviceManager tgdm;
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Hello World");
-
         Configuration configuration = new Configuration();
-        HomeScreen homeScreen = new HomeScreen(configuration, primaryStage, getGazePlayInstallationRepo());
-        OptionsPane optionsPane = new OptionsPane(configuration);
-        Scene scene = new Scene( homeScreen , Color.TRANSPARENT);
-        configuration.setScene(scene);
-        primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth());
-        primaryStage.setHeight(Screen.getPrimary().getBounds().getHeight());
-
-        primaryStage.setScene(scene);
-
-        StageUtils.displayUnclosable(primaryStage);
-
-        scene.setOnMouseMoved((e)->{
-            if (configuration.isGazeInteraction()) {
-                configuration.analyse(e.getScreenX(), e.getScreenY());
-            }
-        });
+        this.tgdm = new TobiiGazeDeviceManager();
+        tgdm.init(configuration);
     }
 
     public static void main(String[] args) {
