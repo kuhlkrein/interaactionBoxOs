@@ -29,6 +29,7 @@ public class Main extends Application {
 
         Configuration configuration = new Configuration();
         HomeScreen homeScreen = new HomeScreen(configuration, primaryStage, getGazePlayInstallationRepo());
+        OptionsPane optionsPane = new OptionsPane(configuration, primaryStage);
         Scene scene = new Scene( homeScreen , Color.TRANSPARENT);
         configuration.setScene(scene);
         primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth());
